@@ -11,6 +11,7 @@ class box_
         int size[1];
 };
 
+int getDistance(sf::Vector2f p1, sf::Vector2f p2);
 int randint(int min, int max);
 
 int main()
@@ -29,7 +30,7 @@ int main()
 
 
     /* entities*/
-    sf::CircleShape dick(32);
+    sf::CircleShape dick(16);
 
     sf::Texture dick_up;
     dick_up.loadFromFile("./textures/dick.png");
@@ -39,7 +40,7 @@ int main()
     
     sf::CircleShape pussy(32);
     sf::Texture     pussy_txt;
-    pussy_txt.loadFromFile("./pussy.png");
+    pussy_txt.loadFromFile("./textures/pussy.png");
     pussy.setPosition(randint(1, 900), randint(1, 800));
 
     /* game loop */
@@ -61,6 +62,13 @@ int main()
             if(event.type == sf::Event::Closed)
             {
                 window.close();
+            }
+
+            if(getDistance(dick.getPosition(), pussy.getPosition()) < 1)
+            {
+                pussy.setPosition(randint(1, 900), randint(1, 800));
+
+                // dick.setRadius(dick.getRadius() + 1);
             }
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
@@ -88,17 +96,27 @@ int main()
                 dick.setPosition(randint(1, 1000), randint(1, 800));
             }
             Sleep(0.05);
+
+
         }
 
         
         window.clear();
         window.draw(dick);
+        window.draw(pussy);
         window.draw(fps_display);
         window.display();
     }
     
 
     return 0;
+}
+
+int getDistance(sf::Vector2f p1, sf::Vector2f p2)
+{
+    int distance = (p1.x - p2.x) - (p1.y - p2.y);
+
+    return distance;
 }
 
 int randint(int min, int max)
