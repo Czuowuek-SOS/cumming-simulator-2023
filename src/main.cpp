@@ -35,15 +35,16 @@ int main()
     sf::Texture dick_up;
     dick_up.loadFromFile("./textures/dick.png");
     dick.setTexture(&dick_up);
-    dick.setPosition(69, 69);
+    dick.setPosition(69, 750);
 
     
-    sf::CircleShape pussy(32);
+    sf::CircleShape pussy(20);
     sf::Texture     pussy_txt;
     pussy_txt.loadFromFile("./textures/pussy.png");
-    pussy.setPosition(randint(1, 900), randint(1, 800));
+    pussy.setPosition(881, 50);
 
     /* game loop */
+    bool trend;
     sf::Clock clock;
     int fps;
     float curentTime;
@@ -56,6 +57,28 @@ int main()
 
         fps_display.setString("sex");
 
+
+        if(trend)
+        {
+            pussy.move(1, 0);
+        }
+        else
+        {
+            pussy.move(-1, 0);
+        }
+
+        if(pussy.getPosition().x < 20)
+        {
+            trend = 1;
+
+            // dick.setRadius(dick.getRadius() + 1);
+        }
+        else if(pussy.getPosition().x > 880)
+        {
+            trend = 0;
+        }
+        
+
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -64,40 +87,16 @@ int main()
                 window.close();
             }
 
-            if(getDistance(dick.getPosition(), pussy.getPosition()) < 1)
-            {
-                pussy.setPosition(randint(1, 900), randint(1, 800));
 
-                // dick.setRadius(dick.getRadius() + 1);
-            }
 
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::S) && dick.getPosition().x > 20)
             {
                 dick.move(-1, 0);
-                dick.setRotation(270);
             }
-            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) && dick.getPosition().x < 880)
             {
                 dick.move(1, 0);
-                dick.setRotation(90);
             }
-            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-            {
-                dick.move(0, -1);
-                dick.setRotation(0);
-            }
-            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-            {
-                dick.move(0, 1);
-                dick.setRotation(180);
-            }
-            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
-            {
-                dick.setPosition(randint(1, 1000), randint(1, 800));
-            }
-            Sleep(0.05);
-
-
         }
 
         
