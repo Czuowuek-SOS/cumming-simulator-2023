@@ -20,7 +20,7 @@ int main()
     ShowWindow(hwnd, 0);
 
     /* window*/
-    sf::RenderWindow window(sf::VideoMode(1000, 800), "sex-simulator x84_64");
+    sf::RenderWindow window(sf::VideoMode(1000, 800), "Cumming Simulator 2022");
     window.setFramerateLimit(69);
 
     sf::Text fps_display;
@@ -42,6 +42,9 @@ int main()
     sf::Texture     pussy_txt;
     pussy_txt.loadFromFile("./textures/pussy.png");
     pussy.setPosition(881, 50);
+
+    sf::Sprite sperm;
+
 
     /* game loop */
     bool trend;
@@ -91,11 +94,11 @@ int main()
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::S) && dick.getPosition().x > 20)
             {
-                dick.move(-1, 0);
+                dick.move(-2, 0);
             }
             else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) && dick.getPosition().x < 880)
             {
-                dick.move(1, 0);
+                dick.move(2, 0);
             }
         }
 
