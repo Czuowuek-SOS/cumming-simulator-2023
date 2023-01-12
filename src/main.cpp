@@ -4,12 +4,8 @@
 #include <windows.h>
 #include <time.h>
 
-class box_
-{
-    public:
-        int velocity;
-        int size[1];
-};
+#include "entities.hpp"
+
 
 int getDistance(sf::Vector2f p1, sf::Vector2f p2);
 int randint(int min, int max);
@@ -23,22 +19,18 @@ int main()
     sf::RenderWindow window(sf::VideoMode(1000, 800), "Cumming Simulator 2022");
     window.setFramerateLimit(69);
 
-    sf::Text fps_display;
-    fps_display.setFillColor(sf::Color::White);
-    fps_display.setPosition(900, 700);
-    fps_display.setCharacterSize(32);
-
 
     /* entities*/
-    sf::CircleShape dick(16);
+    Dick dick;
+
 
     sf::Texture dick_up;
     dick_up.loadFromFile("./textures/dick.png");
     dick.setTexture(&dick_up);
     dick.setPosition(69, 750);
 
-    
-    sf::CircleShape pussy(20);
+
+    Pussy pussy;
     sf::Texture     pussy_txt;
     pussy_txt.loadFromFile("./textures/pussy.png");
     pussy.setPosition(881, 50);
