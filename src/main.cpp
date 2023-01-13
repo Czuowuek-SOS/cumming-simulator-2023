@@ -3,9 +3,18 @@
 #include <string>
 #include <windows.h>
 #include <time.h>
+#include <stdint.h>
 
 #include "entities.hpp"
 
+using std::vector;
+
+auto icon = vector<sf::Uint8>
+{
+    #include "resources/icon.ico"
+};
+
+auto icon_size = sf::Vector2u{32, 32};
 
 int getDistance(sf::Vector2f p1, sf::Vector2f p2);
 int randint(int min, int max);
@@ -19,24 +28,29 @@ int main()
     sf::RenderWindow window(sf::VideoMode(1000, 800), "Cumming Simulator 2022");
     window.setFramerateLimit(69);
 
+    window.setIcon(icon_size.x, icon_size.y, icon.data());
+
 
     /* entities*/
     Dick dick;
-
-
-    sf::Texture dick_up;
-    dick_up.loadFromFile("./textures/dick.png");
-    dick.setTexture(&dick_up);
-    dick.setPosition(69, 750);
-
-
     Pussy pussy;
-    sf::Texture     pussy_txt;
-    pussy_txt.loadFromFile("./textures/pussy.png");
-    pussy.setPosition(881, 50);
-
     sf::Sprite sperm;
 
+
+    sf::Texture dick_texture;
+    sf::Texture pussy_texture;
+
+    dick_texture.loadFromFile("./resources/textures/dick.png");
+    pussy_texture.loadFromFile("./resources/textures/pussy.png");
+
+    dick.setTexture(&dick_texture);
+    pussy.setTexture(&pussy_texture);
+
+    dick.setPosition(69, 745);
+    pussy.setPosition(881, 50);
+
+    dick.setRadius(25);
+    pussy.setRadius(35);
 
     /* game loop */
     bool trend;
@@ -50,7 +64,6 @@ int main()
         fps = 1.f / (curentTime - lastTime);
         lastTime = curentTime;
 
-        fps_display.setString("sex");
 
 
         if(trend)
@@ -98,7 +111,6 @@ int main()
         window.clear();
         window.draw(dick);
         window.draw(pussy);
-        window.draw(fps_display);
         window.display();
     }
     

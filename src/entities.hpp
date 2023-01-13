@@ -2,7 +2,7 @@
 #include <SFML/Audio.hpp>
 #include <math.h>
 
-class Spermatozoid : sf::CircleShape
+class Spermatozoid : public sf::CircleShape
 {
     public:
         float x;
@@ -21,7 +21,7 @@ class Spermatozoid : sf::CircleShape
     }
 };
 
-class Dick : sf::CircleShape
+class Dick : public sf::CircleShape
 {
     public:
         float x;
@@ -35,7 +35,7 @@ class Dick : sf::CircleShape
     }
 };
 
-class Pussy : sf::CircleShape
+class Pussy : public sf::CircleShape
 {
     public:
         int x;
