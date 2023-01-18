@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
 #include <iostream>
 #include <string>
 #include <windows.h>
@@ -25,7 +27,7 @@ int main()
     ShowWindow(hwnd, 0);
 
     /* window*/
-    sf::RenderWindow window(sf::VideoMode(1000, 800), "Cumming Simulator 2022");
+    sf::RenderWindow window(sf::VideoMode(1000, 800), "Cumming Simulator 2023");
     window.setFramerateLimit(69);
     window.setVerticalSyncEnabled(true);
 
@@ -35,23 +37,28 @@ int main()
     /* entities*/
     Dick dick;
     Pussy pussy;
-    sf::Sprite sperm;
+    Spermatozoid sperm;
 
-
+    
     sf::Texture dick_texture;
     sf::Texture pussy_texture;
+    sf::Texture sperm_texture;
 
     dick_texture.loadFromFile("./resources/textures/dick.png");
     pussy_texture.loadFromFile("./resources/textures/pussy.png");
+    sperm_texture.loadFromFile("./resources/textures/sperm.png");
 
     dick.setTexture(&dick_texture);
     pussy.setTexture(&pussy_texture);
+    sperm.setTexture(&sperm_texture);
 
     dick.setPosition(69, 745);
     pussy.setPosition(881, 50);
+    sperm.setPosition(50, 50);
 
     dick.setRadius(25);
     pussy.setRadius(35);
+    sperm.setRadius(20);
 
     /* game loop */
     bool trend;
@@ -96,7 +103,12 @@ int main()
                 window.close();
             }
 
-
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !dick.cumming)
+            {
+                dick.cum(sperm);
+                dick.cumming = true;
+                sperm.setPosition(dick.getPosition());
+            }
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::S) && dick.getPosition().x > 20)
             {
@@ -106,12 +118,36 @@ int main()
             {
                 dick.move(2, 0);
             }
+
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+            {
+                
+            }
+        }
+
+        if(dick.cumming)
+        {
+            sperm.move(0, -sperm.v);
+            if(sperm.isInVagina(pussy.getPosition()));
+            {
+                dick.cumming = false;
+                dick.setRadius(dick.getRadius() + 5);
+            }
         }
 
         
         window.clear();
         window.draw(dick);
         window.draw(pussy);
+        if(sperm.getPosition().y > 1)
+        {
+            window.draw(sperm);
+        }
+        else
+        {
+            dick.cumming = false;
+        }
+
         window.display();
     }
     

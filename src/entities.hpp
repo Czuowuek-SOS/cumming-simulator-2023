@@ -8,16 +8,20 @@ class Spermatozoid : public sf::CircleShape
         float x;
         float y; 
 
-        float v;
+        float v = 6.0f;
 
     bool isInVagina(const sf::Vector2f pos)
     {
-        float distance = sqrt(pow(pos.x - x, 2) + pow(y - pos.y, 2));
-        if(distance < 0.5)
+        // float distance = sqrt(pow(pos.x - x, 2) + pow(y - pos.y, 2));
+        float distance = (pos.x - x) - (y - pos.y);
+        if(distance < 6.0)
         {
             return true;
         }
-        return false;
+        else
+        {
+            return false;
+        }
     }
 };
 
@@ -27,11 +31,12 @@ class Dick : public sf::CircleShape
         float x;
         float y; 
 
-        float size;
-        
-    void cum()
-    {
+        bool cumming = false;
 
+    void cum(Spermatozoid sperm)
+    {
+        cumming = true;
+        sperm.setPosition(getPosition());
     }
 };
 
