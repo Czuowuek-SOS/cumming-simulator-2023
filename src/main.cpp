@@ -9,12 +9,12 @@
 
 using std::vector;
 
-auto icon = vector<sf::Uint8>
-{
-    #include "resources/icon.ico"
-};
+// auto icon = vector<sf::Uint8>
+// {
+//     #include "resources/icon.ico"
+// };
 
-auto icon_size = sf::Vector2u{32, 32};
+// auto icon_size = sf::Vector2u{32, 32};
 
 int getDistance(sf::Vector2f p1, sf::Vector2f p2);
 int randint(int min, int max);
@@ -27,8 +27,9 @@ int main()
     /* window*/
     sf::RenderWindow window(sf::VideoMode(1000, 800), "Cumming Simulator 2022");
     window.setFramerateLimit(69);
+    window.setVerticalSyncEnabled(true);
 
-    window.setIcon(icon_size.x, icon_size.y, icon.data());
+    // window.setIcon(icon_size.x, icon_size.y, icon.data());
 
 
     /* entities*/
