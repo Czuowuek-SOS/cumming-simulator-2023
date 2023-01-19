@@ -60,6 +60,16 @@ int main()
     pussy.setRadius(35);
     sperm.setRadius(20);
 
+    sf::Sound bed_sex_sounds;
+    sf::SoundBuffer sound_buffer;
+
+    sound_buffer.loadFromFile("./resources/sounds/bed-sex-sounds.wav");
+
+    bed_sex_sounds.setBuffer(sound_buffer);
+
+    bed_sex_sounds.play();
+    bed_sex_sounds.setLoop(true);
+
     /* game loop */
     bool trend;
     sf::Clock clock;
@@ -128,11 +138,10 @@ int main()
         if(dick.cumming)
         {
             sperm.move(0, -sperm.v);
-            if(sperm.isInVagina(pussy.getPosition()));
-            {
-                dick.cumming = false;
-                dick.setRadius(dick.getRadius() + 5);
-            }
+            // if(sperm.isInVagina(pussy.getPosition()));
+            // {
+            //     dick.cumming = false;
+            // }
         }
 
         

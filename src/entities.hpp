@@ -5,16 +5,13 @@
 class Spermatozoid : public sf::CircleShape
 {
     public:
-        float x;
-        float y; 
-
         float v = 6.0f;
 
     bool isInVagina(const sf::Vector2f pos)
     {
         // float distance = sqrt(pow(pos.x - x, 2) + pow(y - pos.y, 2));
-        float distance = (pos.x - x) - (y - pos.y);
-        if(distance < 6.0)
+        float distance = sqrt(pow(pos.x - getPosition().x, 2) + pow(pos.y - getPosition().y, 2));
+        if(distance < 2.0)
         {
             return true;
         }
