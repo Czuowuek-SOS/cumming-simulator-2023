@@ -11,7 +11,8 @@ class Spermatozoid : public sf::CircleShape
     {
         // float distance = sqrt(pow(pos.x - x, 2) + pow(y - pos.y, 2));
         float distance = sqrt(pow(pos.x - getPosition().x, 2) + pow(pos.y - getPosition().y, 2));
-        if(distance < 2.0)
+        std::cout << distance << '\n';
+        if(distance < 10.0)
         {
             return true;
         }

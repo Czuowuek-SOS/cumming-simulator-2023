@@ -138,10 +138,10 @@ int main()
         if(dick.cumming)
         {
             sperm.move(0, -sperm.v);
-            // if(sperm.isInVagina(pussy.getPosition()));
-            // {
-            //     dick.cumming = false;
-            // }
+            if(sperm.isInVagina(pussy.getPosition()));
+            {
+                // dick.cumming = false;
+            }
         }
 
         
