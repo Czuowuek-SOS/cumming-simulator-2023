@@ -1,5 +1,4 @@
-/bin
-/include
-/lib
-/readme.md
 /.vscode
+/bin
+/src/resources/icon.png
+/readme.md

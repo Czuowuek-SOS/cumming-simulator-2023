@@ -9,6 +9,10 @@
 
 #include "entities.hpp"
 
+/* resources*/
+
+#include "resources/icon.h"
+
 using std::vector;
 
 // auto icon = vector<sf::Uint8>
@@ -31,15 +35,16 @@ int main()
     window.setFramerateLimit(69);
     window.setVerticalSyncEnabled(true);
 
-    // window.setIcon(icon_size.x, icon_size.y, icon.data());
+    sf::Image icon;
+    icon.loadFromMemory(icon_png, (std::size_t)sizeof(icon_png));
 
+    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
     /* entities*/
     Dick dick;
     Pussy pussy;
     Spermatozoid sperm;
 
-    
     sf::Texture dick_texture;
     sf::Texture pussy_texture;
     sf::Texture sperm_texture;
@@ -54,7 +59,7 @@ int main()
 
     dick.setPosition(69, 745);
     pussy.setPosition(881, 50);
-    sperm.setPosition(50, 50);
+    sperm.setPosition(0, -1);
 
     dick.setRadius(25);
     pussy.setRadius(35);
@@ -71,6 +76,7 @@ int main()
     bed_sex_sounds.setLoop(true);
 
     /* game loop */
+    dick.cumming = false;
     bool trend;
     sf::Clock clock;
     int fps;
@@ -138,9 +144,10 @@ int main()
         if(dick.cumming)
         {
             sperm.move(0, -sperm.v);
-            if(sperm.isInVagina(pussy.getPosition()));
+            if(sperm.isInVagina(pussy))
             {
-                // dick.cumming = false;
+                dick.cumming = false;
+                pussy.ohh();
             }
         }
 
@@ -148,7 +155,7 @@ int main()
         window.clear();
         window.draw(dick);
         window.draw(pussy);
-        if(sperm.getPosition().y > 1)
+        if(sperm.getPosition().y > 0 && dick.cumming)
         {
             window.draw(sperm);
         }
