@@ -40,6 +40,14 @@ int main()
 
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
+    sf::Font font;
+    font.loadFromFile("./resources/fonts/Roboto-Bold.ttf");
+
+    sf::Text points_count;
+    points_count.setFont(font);
+    points_count.setCharacterSize(20);
+    points_count.setPosition(sf::Vector2f(20, 20));
+
     /* entities*/
     Dick dick;
     Pussy pussy;
@@ -79,6 +87,7 @@ int main()
     dick.cumming = false;
     bool trend;
     sf::Clock clock;
+    int points = 0;
     int fps;
     float curentTime;
     float lastTime = 0;
@@ -88,22 +97,21 @@ int main()
         fps = 1.f / (curentTime - lastTime);
         lastTime = curentTime;
 
-
+        points_count.setString(std::to_string(points));
 
         if(trend)
         {
-            pussy.move(1, 0);
+            pussy.move(pussy.v, 0);
         }
         else
         {
-            pussy.move(-1, 0);
+            pussy.move(-pussy.v, 0);
         }
 
         if(pussy.getPosition().x < 20)
         {
             trend = 1;
 
-            // dick.setRadius(dick.getRadius() + 1);
         }
         else if(pussy.getPosition().x > 880)
         {
@@ -148,6 +156,12 @@ int main()
             {
                 dick.cumming = false;
                 pussy.ohh();
+                pussy.v += 0.5f;
+
+                dick.setRadius(dick.getRadius() + 2);
+                dick.move(0, -5);
+                
+                points++;
             }
         }
 
@@ -164,6 +178,7 @@ int main()
             dick.cumming = false;
         }
 
+        window.draw(points_count);
         window.display();
     }
     

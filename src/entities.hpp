@@ -8,6 +8,7 @@ class Pussy : public sf::CircleShape
     public:
         int x;
         int y;
+        float v = 1.0f;
 
         sf::Sound ohh_;
         sf::SoundBuffer soundBuffer;
@@ -33,7 +34,7 @@ class Spermatozoid : public sf::CircleShape
         {
             sf::Vector2f pos = pussy.getPosition();
             float distance = sqrt(pow(pos.x - getPosition().x, 2) + pow(pos.y - getPosition().y, 2));
-            std::cout << distance << '\n';
+            // std::cout << distance << '\n';
             if(distance < getRadius() + pussy.getRadius())
             {
                 return true;
