@@ -31,10 +31,47 @@ using std::vector;
 int getDistance(sf::Vector2f p1, sf::Vector2f p2);
 int randint(int min, int max);
 
-int main()
+int main(int argc, char** argv)
 {
     // HWND hwnd = GetConsoleWindow();
     // ShowWindow(hwnd, 0);
+    // if(argc == 1)
+    // {
+    //     AllocConsole();
+    // }        
+
+    int id = MessageBox(NULL, "Do you want do enable child mode?", "Cumming Simulator 2023", MB_YESNO);
+
+    sf::Texture background_texture;
+    sf::Sprite background;
+    const char* soundtrack_path;
+    const char* dick_texture_path;
+    const char* pussy_texture_path;
+    const char* sperm_texture_path;
+    float pussy_size = 35;
+    if(id == IDYES)
+    {
+        soundtrack_path = "./resources/sounds/radio-vatican.wav";
+
+        dick_texture_path  = "./resources/textures/mickey.png";        
+        sperm_texture_path = "./resources/textures/kremuwka.png";
+        pussy_texture_path = "./resources/textures/sun.png";
+        pussy_size = 60;
+
+        background_texture.loadFromFile("./resources/textures/bg.png");
+        
+        background.setTexture(background_texture);
+        background.setOrigin(1000 / 2, 800 / 2);
+        background.setScale(1000, 800);
+    }
+    else
+    {
+        dick_texture_path  = "./resources/textures/dick.png";
+        pussy_texture_path = "./resources/textures/pussy.png";
+        sperm_texture_path = "./resources/textures/sperm.png";
+
+        soundtrack_path = "./resources/sounds/bed-sex-sounds.wav";
+    }
 
     /* window*/
     sf::RenderWindow window(sf::VideoMode(1000, 800), "Cumming Simulator 2023");
@@ -43,30 +80,6 @@ int main()
 
     sf::Image icon;
     icon.loadFromMemory(icon_png, (std::size_t)sizeof(icon_png));
-
-    int id = MessageBox(NULL, "Do you want do enable child mode?", "Cumming Simulator 2023", MB_YESNO);
-
-    const char* dick_texture_path;
-    const char* pussy_texture_path;
-    if(id == IDYES)
-    {
-        dick_texture_path  = "./resources/textures/mickey.png";        
-        pussy_texture_path = "./resources/textures/sun.png";
-    }
-    else
-    {
-        dick_texture_path  = "./resources/textures/dick.png";
-        pussy_texture_path = "./resources/textures/pussy.png";
-
-        sf::Texture bg;
-        bg.loadFromFile("./resources/textures/pussy.png");
-        
-        sf::Sprite background;
-        background.setTexture(bg);
-        background.setOrigin(window.getSize().x / 2, window.getSize().y / 2);
-
-    }
-
 
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
@@ -95,7 +108,7 @@ int main()
 
     dick_texture.loadFromFile(dick_texture_path);
     pussy_texture.loadFromFile(pussy_texture_path);
-    sperm_texture.loadFromFile("./resources/textures/sperm.png");
+    sperm_texture.loadFromFile(sperm_texture_path);
 
     dick.setTexture(&dick_texture);
     pussy.setTexture(&pussy_texture);
@@ -106,13 +119,13 @@ int main()
     sperm.setPosition(0, -1);
 
     dick.setRadius(25);
-    pussy.setRadius(35);
+    pussy.setRadius(pussy_size);
     sperm.setRadius(20);
 
     sf::Sound bed_sex_sounds;
     sf::SoundBuffer sound_buffer;
 
-    sound_buffer.loadFromFile("./resources/sounds/bed-sex-sounds.wav");
+    sound_buffer.loadFromFile(soundtrack_path);
 
     bed_sex_sounds.setBuffer(sound_buffer);
 
@@ -195,7 +208,7 @@ int main()
                 game_over_text.setFont(font);
                 game_over_text.setCharacterSize(69);
                 game_over_text.setPosition(sf::Vector2f(200, 400));
-                game_over_text.setString(L"Cipka wygrala");
+                game_over_text.setString(L"Game Over");
                 window.draw(game_over_text);
                 window.display();
 
@@ -231,6 +244,7 @@ int main()
 
         
         window.clear();
+        window.draw(background);
         window.draw(dick);
         window.draw(pussy);
         if(sperm.getPosition().y > 0 && dick.cumming)
