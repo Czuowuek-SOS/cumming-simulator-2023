@@ -51,7 +51,7 @@ int main(int argc, char** argv)
     float pussy_size = 35;
     if(id == IDYES)
     {
-        soundtrack_path = "./resources/sounds/radio-vatican.wav";
+        soundtrack_path = "./resources/sounds/Mydlo-lubi-zabawe.wav";
 
         dick_texture_path  = "./resources/textures/mickey.png";        
         sperm_texture_path = "./resources/textures/kremuwka.png";
@@ -232,10 +232,11 @@ int main(int argc, char** argv)
                 dick.cumming = false;
                 pussy.ohh();
                 pussy.v += 0.5f;
+                sperm.v += 1;
                 pussy.setPosition(881, 50);
 
                 dick.setRadius(dick.getRadius() + 1);
-                dick.move(0, -5);
+                dick.move(0, -2.5 );
                 
                 points++;
             }
