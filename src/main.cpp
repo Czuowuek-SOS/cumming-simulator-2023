@@ -21,6 +21,8 @@
 
 using std::vector;
 
+#define version 1.0
+
 // auto icon = vector<sf::Uint8>
 // {
 //     #include "resources/icon.ico"
@@ -39,6 +41,11 @@ int main(int argc, char** argv)
     // {
     //     AllocConsole();
     // }        
+
+    if(checkUpdate())
+    {
+        
+    }
 
     int id = MessageBox(NULL, "Do you want do enable child mode?", "Cumming Simulator 2023", MB_YESNO);
 
